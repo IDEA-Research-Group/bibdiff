@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+The result is the first database, removing the entities existing in the second database, based on his IDs
+This script remove from database1 (first parameter) the entities in database2 (second parameter)
+"""
+
 import argparse
 import bibtexparser
 from bibtexparser.bibdatabase import BibDatabase
@@ -27,6 +33,10 @@ def main():
 
 
 def subtract(database1, database2):
+    """
+    The result of the operation is a database2 - database1.
+    The result is the database2 without the entities of database1
+    """
     db = BibDatabase()
     for entry in database1.entries:
         if not contains(entry, database2):
@@ -35,6 +45,9 @@ def subtract(database1, database2):
 
 
 def contains(entry, database):
+    """
+    check if entry exits in the database, based on his ID
+    """
     for ent in database.entries:
         if entry['ID'] == ent['ID']:
             return True
@@ -43,7 +56,7 @@ def contains(entry, database):
 
 def parse_arg():
     parser = argparse.ArgumentParser(prog='bibdiff')
-    parser.add_argument('bib', nargs=2 ,type=str, help='an integer for the accumulator')
+    parser.add_argument('bib', nargs=2, type=str, help='an integer for the accumulator')
     parser.add_argument('-o', '--output', nargs='?', help='bib target file')
     return parser.parse_args()
 
