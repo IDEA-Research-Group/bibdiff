@@ -55,7 +55,9 @@ def contains(entry, database):
 
 
 def parse_arg():
-    parser = argparse.ArgumentParser(prog='bibdiff')
+    parser = argparse.ArgumentParser(prog='bibdiff', description='The result is the first database, removing the '
+                                                                 'entities existing in the second database, based on '
+                                                                 'his IDs')
     parser.add_argument('bib', nargs=2, type=str, help='an integer for the accumulator')
     parser.add_argument('-o', '--output', nargs='?', help='bib target file')
     return parser.parse_args()
