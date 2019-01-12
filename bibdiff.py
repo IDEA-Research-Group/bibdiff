@@ -1,5 +1,6 @@
 import argparse
 import bibtexparser
+from bibtexparser.bibdatabase import BibDatabase
 import os.path
 
 
@@ -26,7 +27,18 @@ def main():
 
 
 def subtract(database1, database2):
-    return database1
+    db = BibDatabase()
+    for entry in database1.entries:
+        if not contains(entry, database2):
+            db.entries.append(entry)
+    return db
+
+
+def contains(entry, database):
+    for ent in database.entries:
+        if entry['ID'] == ent['ID']:
+            return True
+    return False
 
 
 def parse_arg():
