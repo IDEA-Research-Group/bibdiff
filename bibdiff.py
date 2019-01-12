@@ -2,11 +2,13 @@
 """
 The result is the first database, removing the entities existing in the second database, based on his IDs
 This script remove from database1 (first parameter) the entities in database2 (second parameter)
-"""
 
+José Miguel Pérez <josemi@us.es>
+
+"""
 import argparse
-import bibtexparser
 from bibtexparser.bibdatabase import BibDatabase
+import bibtexparser
 import os.path
 
 
@@ -58,8 +60,8 @@ def parse_arg():
     parser = argparse.ArgumentParser(prog='bibdiff', description='The result is the first database, removing the '
                                                                  'entities existing in the second database, based on '
                                                                  'his IDs')
-    parser.add_argument('bib', nargs=2, type=str, help='an integer for the accumulator')
-    parser.add_argument('-o', '--output', nargs='?', help='bib target file')
+    parser.add_argument('bib', nargs=2, type=str)
+    parser.add_argument('-o', '--output', nargs='?', help='file')
     return parser.parse_args()
 
 
