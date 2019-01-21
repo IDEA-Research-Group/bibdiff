@@ -9,6 +9,7 @@ José Miguel Pérez <josemi@us.es>
 import argparse
 from bibtexparser.bibdatabase import BibDatabase
 import bibtexparser
+from bibtexparser.bparser import BibTexParser
 import os.path
 
 
@@ -18,12 +19,14 @@ def main():
     if not (os.path.isfile(args.bib[0]) and os.path.isfile(args.bib[1])):
         print("input file not found")
         exit(0)
-
+	#this is needed to repair the issue#1
+    parser = BibTexParser(common_strings=True)
+	
     with open(args.bib[0]) as bibtex_file:
-        database1 = bibtexparser.load(bibtex_file)
+        database1 = bibtexparser.load(bibtex_file,parser)
 
     with open(args.bib[1]) as bibtex_file:
-        database2 = bibtexparser.load(bibtex_file)
+        database2 = bibtexparser.load(bibtex_file, parser)
 
     result = subtract(database1, database2)
 
@@ -42,6 +45,7 @@ def subtract(database1, database2):
     db = BibDatabase()
     for entry in database1.entries:
         if not contains(entry, database2):
+            print(entry)
             db.entries.append(entry)
     return db
 
@@ -63,7 +67,6 @@ def parse_arg():
     parser.add_argument('bib', nargs=2, type=str)
     parser.add_argument('-o', '--output', nargs='?', help='file')
     return parser.parse_args()
-
 
 if __name__ == "__main__":
     main()
