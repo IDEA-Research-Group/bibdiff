@@ -3,7 +3,7 @@
 The result is the first database, removing the entities existing in the second database, based on his IDs
 This script remove from database1 (first parameter) the entities in database2 (second parameter)
 
-José Miguel Pérez <josemi@us.es>
+José Miguel Pérez-Álvarez <josemi@us.es>
 A. M. Reina Quintero <reinaqu@us.es>
 
 """
